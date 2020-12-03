@@ -1,24 +1,25 @@
 package comp3415.telehealth;
 
-import comp3415.telehealth.db.LogInfo;
+import comp3415.telehealth.model.User;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Separator;
-import javafx.scene.control.Tooltip;
-import javafx.stage.Stage;
-
+import javafx.scene.control.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RegisterController implements Initializable {
+public class RegisterController extends Controller implements Initializable {
 
     @FXML private ChoiceBox userTypePicker;
+
+    @FXML private TextField nameField;
+
+    @FXML private TextField usernameField;
+
+    @FXML private PasswordField passwordField;
+
+    @FXML private Label outputText;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -39,21 +40,29 @@ public class RegisterController implements Initializable {
                 "Doctor")
         );
         userTypePicker.setValue("Patient");
+        outputText.setText(" ");
+
 
     }
 
-    public void redirectToLogin()
+    public void register()
     {
         try {
-            // Prepare the scene and stage:
-            Parent loginViewParent = FXMLLoader.load(getClass().getResource("view/welcome.fxml"));
-            Scene loginViewScene = new Scene(loginViewParent);
-            // Gets the window
-            Stage window = LogInfo.window;
-            window.setScene(loginViewScene);
-            window.show();
-        } catch (IOException ioe) {
-            // Error loading view
+            User.register(nameField.getText(), userTypePicker.getValue().toString(), usernameField.getText(),
+                    passwordField.getText());
+            outputText.setText("Registration Successful");
+        }
+        catch (Exception e) {
+            outputText.setText("Registration Failed");
+        }
+
+    }
+    public void back()
+    {
+        try {
+            redirectToLogin();
+        } catch (IOException ignored) {
+
         }
     }
 }

@@ -12,7 +12,8 @@
                 <Insets />
             </opaqueInsets>
             <items>
-                <Button fx:id="backButton" mnemonicParsing="false" onAction="#redirectToDashboard" text="Back" />
+                <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="Back" />
+            <Label fx:id="statusText" text="Status messages: this text is hidden on initialization" />
             </items>
         </ToolBar>
 
@@ -24,13 +25,13 @@
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="256.0" text="Please enter the information below:" />
                         <Label alignment="CENTER_RIGHT" layoutX="20.0" layoutY="42.0" prefHeight="17.0" prefWidth="95.0" text="Patient ID:" textAlignment="RIGHT" />
                         <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="72.0" prefHeight="17.0" prefWidth="101.0" text="Doctor ID:" />
-                        <Label alignment="CENTER_RIGHT" layoutX="11.0" layoutY="105.0" prefHeight="17.0" prefWidth="105.0" text="Conditions:" />
-                        <TextField fx:id="nameField" layoutX="121.0" layoutY="38.0" promptText="Patient ID" />
-                        <TextField fx:id="usernameField" layoutX="121.0" layoutY="68.0" promptText="Doctor ID" />
+                        <Label alignment="CENTER_RIGHT" layoutX="11.0" layoutY="105.0" prefHeight="17.0" prefWidth="105.0" text="Medical Info:" />
+                        <TextField fx:id="patientIDField" layoutX="121.0" layoutY="38.0" prefHeight="25.0" prefWidth="200.0" promptText="Patient ID (required)" />
+                        <TextField fx:id="doctorIDField" layoutX="121.0" layoutY="68.0" prefHeight="25.0" prefWidth="200.0" promptText="Doctor ID (required)" />
                         <Label alignment="CENTER_RIGHT" layoutX="32.0" layoutY="168.0" prefHeight="17.0" prefWidth="84.0" text="Medications:" />
-                        <Button fx:id="submitButton" layoutX="270.0" layoutY="234.0" mnemonicParsing="false" text="Submit" />
-                  <TextArea layoutX="121.0" layoutY="102.0" prefHeight="58.0" prefWidth="200.0" promptText="Enter all relevant information" />
-                  <TextArea layoutX="121.0" layoutY="168.0" prefHeight="25.0" prefWidth="200.0" promptText="Enter all current medications" />
+                        <Button fx:id="submitButton" layoutX="270.0" layoutY="234.0" mnemonicParsing="false" onAction="#submitForm" text="Submit" />
+                  <TextArea fx:id="medicalInfoField" layoutX="121.0" layoutY="102.0" prefHeight="58.0" prefWidth="200.0" promptText="Enter all relevant information" />
+                  <TextArea fx:id="medicationField" layoutX="121.0" layoutY="168.0" prefHeight="25.0" prefWidth="200.0" promptText="Enter all current medications" />
                     </children>
                 </AnchorPane>
             </content>

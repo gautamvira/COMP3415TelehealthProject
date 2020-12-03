@@ -41,7 +41,8 @@ public class ServerConsole implements ChatIF
      */
     public ServerConsole(int port)
     {
-        server = new EchoServer(port, this);
+        //"servername" sets the name to be displayed on messages from this server
+        server = new EchoServer(port, this, 0, "drjames");
         try
         {
             server.listen(); //Start listening for connections
@@ -113,7 +114,7 @@ public class ServerConsole implements ChatIF
         }
         port = Integer.parseInt(port_s); // set the port for the server to the one entered in the command line
         ServerConsole console = new ServerConsole(port); // create a server console with the specified port #
-        System.out.println("Welcome to Super Chat Server! Start messaging by typing below. Press ENTER to send.");
+        System.out.println("Welcome to MediChat Server! Start messaging by typing below. Press ENTER to send.");
         System.out.println("You can also enter commands by prefixing a #: available commands are listed below.");
         System.out.println("\t 1. #quit \n" +
                 "\t 2. #stop \n" +

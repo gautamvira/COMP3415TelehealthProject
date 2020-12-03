@@ -57,7 +57,7 @@ public class ConnectionToClient extends Thread {
 	private boolean				readyToStop;
 
 	/**
-	 * Map to save information about the cuninghame.comp3415projectphase1.client such as its login ID. The
+	 * Map to save information about the cuninghame.comp3415projectphase1.client such as its loginUser ID. The
 	 * initial size of the map is small since it is not expected that concrete
 	 * servers will want to store many different types of information about each
 	 * cuninghame.comp3415projectphase1.client. Used by the setInfo and getInfo methods.

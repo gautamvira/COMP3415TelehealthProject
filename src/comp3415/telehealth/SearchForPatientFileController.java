@@ -1,20 +1,15 @@
 package comp3415.telehealth;
 
-import comp3415.telehealth.db.LogInfo;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SearchForPatientFileController implements Initializable {
+public class SearchForPatientFileController extends Controller implements Initializable {
 
     @FXML TextField patientIDField;
     @FXML Button submitButton;
@@ -37,18 +32,15 @@ public class SearchForPatientFileController implements Initializable {
 
     }
 
-    public void redirectToDashboard()
-    {
+    /**
+     * Click listener for back button press
+     * @param e the action event that led to this method call
+     */
+    public void back(ActionEvent e){
         try {
-            // Prepare the scene and stage:
-            Parent dashViewParent = FXMLLoader.load(getClass().getResource("view/dashboard.fxml"));
-            Scene dashViewScene = new Scene(dashViewParent);
-            // Gets the window
-            Stage window = LogInfo.window;
-            window.setScene(dashViewScene);
-            window.show();
-        } catch (IOException ioe) {
-            // Error loading view
+            redirectToDashboard();
+        }catch (IOException ignored){
+
         }
     }
 

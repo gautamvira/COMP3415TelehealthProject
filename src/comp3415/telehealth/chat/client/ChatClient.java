@@ -24,12 +24,10 @@ import java.net.SocketException;
 public class ChatClient extends AbstractClient
 {
   //Instance variables **********************************************
-  
-  /**
-   * The interface type variable.  It allows the implementation of 
-   * the display method in the client.
-   */
-  ChatIF clientUI; 
+
+  // CHATIF interface variables
+  ChatIF clientUI;
+  int clientID;
 
   
   //Constructors ****************************************************
@@ -42,11 +40,12 @@ public class ChatClient extends AbstractClient
    * @param clientUI The interface type variable.
    */
   
-  public ChatClient(String host, int port, ChatIF clientUI) 
+  public ChatClient(String host, int port, ChatIF clientUI, int clientUserID)
     throws IOException 
   {
     super(host, port); //Call the superclass constructor
     this.clientUI = clientUI;
+    this.clientID = clientUserID;
     openConnection();
   }
 
@@ -57,8 +56,7 @@ public class ChatClient extends AbstractClient
    * thread that is waiting for messages from the server. The method may be
    * overridden by subclasses.
    *
-   * @param exception
-   *            the exception raised.
+   * @param exception the exception raised.
    */
   protected void connectionException(Exception exception) {
 
@@ -95,10 +93,6 @@ public class ChatClient extends AbstractClient
     try
     {
       sendToServer(message); //Sends the client's msg to server
-    }
-    catch(SocketException closedByUser){ // If the client is logged out, a SocketException will be thrown
-      // clientUI.display("You are disconnected.");
-      // Does not terminate client
     }
     catch(IOException e) // If there is a problem with the connection, an IOException will be thrown
     {
@@ -150,7 +144,7 @@ public class ChatClient extends AbstractClient
           clientUI.display("You are already logged out.");
         }
         break;
-      case "#login": //Logs the user back in after a #logoff
+      case "#loginUser": //Logs the user back in after a #logoff
         if (!isConnected()){
           clientUI.display("Logging in...");
           try { openConnection(); } catch(IOException e) { clientUI.display("Couldn't log in."); }

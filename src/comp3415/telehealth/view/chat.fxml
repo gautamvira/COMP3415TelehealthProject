@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="comp3415.telehealth.ChatController">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="comp3415.telehealth.ChatController">
     <children>
         <!-- Bottom Toolbar -->
         <ToolBar fx:id="bottomBar" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
@@ -12,8 +12,8 @@
                 <Insets />
             </opaqueInsets>
             <items>
-                <Button fx:id="backButton" mnemonicParsing="false" onAction="#redirectToDashboard" text="Back to Dashboard" />
-                <Label fx:id="bottomLabel" nodeOrientation="LEFT_TO_RIGHT" prefWidth="260.0" text="Connection messages" />
+                <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="Go Back" />
+                <Label fx:id="bottomLabel" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="317.0" text="Connection messages" />
             </items>
         </ToolBar>
 
@@ -22,9 +22,9 @@
             <content>
                 <AnchorPane fx:id="contentPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextArea editable="false" layoutX="14.0" layoutY="14.0" prefHeight="217.0" prefWidth="377.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                  <TextField layoutX="14.0" layoutY="237.0" prefHeight="25.0" prefWidth="314.0" AnchorPane.leftAnchor="0.0" />
-                  <Button layoutX="334.0" layoutY="237.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="54.0" text="Send" AnchorPane.rightAnchor="0.0" />
+                  <TextField fx:id="textInput" layoutX="14.0" layoutY="237.0" onAction="#send" prefHeight="25.0" prefWidth="314.0" promptText="Write your message here" AnchorPane.leftAnchor="0.0" />
+                  <Button fx:id="sendButton" layoutX="334.0" layoutY="237.0" mnemonicParsing="false" onAction="#send" prefHeight="25.0" prefWidth="54.0" text="Send" AnchorPane.rightAnchor="0.0" />
+                  <ListView fx:id="textOutput" layoutX="14.0" layoutY="14.0" prefHeight="213.0" prefWidth="374.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>
                 </AnchorPane>
             </content>

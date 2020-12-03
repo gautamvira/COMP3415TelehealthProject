@@ -1,5 +1,6 @@
 package comp3415.telehealth;
 
+import comp3415.telehealth.db.AppInfo;
 import comp3415.telehealth.db.LogInfo;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,16 +19,16 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        LogInfo.window = primaryStage;
+        AppInfo.APP_WINDOW = primaryStage;
 
         // The beginning "View" specified in FXML
         Parent rootView = FXMLLoader.load(getClass().getResource("view/welcome.fxml"));
 
-        // The beginning scene containing the login view
+        // The beginning scene containing the loginUser view
         Scene loginScene = new Scene(rootView);
 
         // Set the stage (window) properties and show it:
-        primaryStage.setTitle("COMP3415 Group Project");
+        primaryStage.setTitle("COMP3415 GROUP PROJECT");
         primaryStage.setScene(loginScene);
         primaryStage.show();
 

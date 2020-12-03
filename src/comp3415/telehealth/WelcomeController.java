@@ -1,32 +1,26 @@
 package comp3415.telehealth;
 
-import comp3415.telehealth.db.LogInfo;
-import comp3415.telehealth.db.Login;
 import comp3415.telehealth.db.GlobalUser;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class WelcomeController implements Initializable {
+public class WelcomeController extends Controller implements Initializable {
 
     // Variable names used here *must match* the fx:id set in the FXML file for that component.
     @FXML private Label welcomeText;
     @FXML private Button loginBtn;
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
-    @FXML private ChoiceBox userTypePicker;
     @FXML private Button sosButton;
+    @FXML private ChoiceBox userTypePicker;
 
     /**
      * Initializes the controller class
@@ -34,7 +28,8 @@ public class WelcomeController implements Initializable {
      * @param resources
      */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources)
+    {
 
         // (Initial attributes set in the welcome.fxml file)
 
@@ -54,22 +49,14 @@ public class WelcomeController implements Initializable {
      * Starts an anonymous chat with a doctor for an emergency situation.
      * @param event
      *
-     * This method does not work as intended since the initialize function
-     * in ChatController.java requires a user to be logged in.
-     *
      */
-
-    public void sosChat(ActionEvent event) {
-        try {
-            // Prepare the scene and stage:
-            Parent chatViewParent = FXMLLoader.load(getClass().getResource("view/chat.fxml"));
-            Scene chatViewScene = new Scene(chatViewParent);
-            // Gets the window
-            Stage window = LogInfo.window;
-            window.setScene(chatViewScene);
-            window.show();
-        } catch (IOException ioe) {
-            // Error loading view
+    public void sosChat(ActionEvent event)
+    {
+        try{
+            redirectToChat();
+        }catch(IOException e){
+            welcomeText.setText("Error loading the chat. Should probably call your doctor or 911 if its an emergency.");
+            e.printStackTrace();
         }
     }
 
@@ -79,62 +66,44 @@ public class WelcomeController implements Initializable {
      * Handles the user's log in request.
      * @param event the (Mouse)Event associated with this method call
      */
-    public void loginUser(ActionEvent event) {
+    public void loginUser(ActionEvent event)
+    {
         // Required variables
-        Login log = new Login();
-        String userType = "Patient";
         Parent dashViewParent;
 
         try{
-            // login information from user input:
+            // loginUser information from user input:
             String username = usernameField.getText();
             String password = passwordField.getText();
-            userType = userTypePicker.getValue().toString();
+            String userType = userTypePicker.getValue().toString();
 
             // Login user, then show the dashboard.
-            if(GlobalUser.isLogin(username, password, userType)){
-                // Change the user's login status:
-                GlobalUser.logIn();
-
-                // Prepare the scene and stage:
-                dashViewParent = FXMLLoader.load(getClass().getResource("view/dashboard.fxml"));
-                Scene dashViewScene = new Scene(dashViewParent);
-
-                // This line gets the Stage (window) info from the button being clicked
-                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-                // Set the window to the new scene:
-                window.setScene(dashViewScene);
-                window.show();
+            if(GlobalUser.loginUser(username, password, userType)){
+                redirectToDashboard();
             }
             else{ // if username password incorrect
-                welcomeText.setText("Invalid credentials. Please try again.");
+                welcomeText.setText("Invalid credentials. Please verify and try again.");
             }
         }
         catch(Exception e){
-            welcomeText.setText(e.toString());
+            e.printStackTrace();
         }
 
     }
-
-
     /**
      * This method is called when the register button is pushed.
-     * Handles the user's registration request.
+     * Calls the redirect function.
      * @param event the (Mouse)Event associated with this method call
      */
-    public void redirectToRegister(ActionEvent event) throws IOException
+    public void registerUser(ActionEvent event)
     {
-        // Prepare the scene and stage:
-        Parent registerViewParent = FXMLLoader.load(getClass().getResource("view/register.fxml"));
-        Scene registerViewScene = new Scene(registerViewParent);
-
-        // This line gets the Stage (window) info from the button being clicked
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        // Set the window to the new scene:
-        window.setScene(registerViewScene);
-        window.show();
+        try{
+            redirectToRegister();
+        }catch(IOException e){
+            welcomeText.setText("Error loading the registration form.");
+        }
     }
+
+
 
 }

@@ -12,7 +12,7 @@
                 <Insets />
             </opaqueInsets>
             <items>
-                <Button fx:id="backButton" mnemonicParsing="false" onAction="#redirectToLogin" text="Back" />
+                <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="Back" />
             </items>
         </ToolBar>
 
@@ -30,7 +30,8 @@
                   <Label alignment="CENTER_RIGHT" layoutX="68.0" layoutY="137.0" prefHeight="17.0" prefWidth="48.0" text="I am a:" />
                   <ChoiceBox fx:id="userTypePicker" layoutX="120.0" layoutY="133.0" prefWidth="150.0" />
                   <PasswordField fx:id="passwordField" layoutX="121.0" layoutY="101.0" promptText="Password" />
-                  <Button fx:id="submitButton" layoutX="217.0" layoutY="166.0" mnemonicParsing="false" text="Submit" />
+                  <Button fx:id="submitButton" layoutX="217.0" layoutY="166.0" mnemonicParsing="false" onAction="#register" text="Submit" />
+                  <Label fx:id="outputText" alignment="CENTER" contentDisplay="CENTER" layoutX="117.0" layoutY="205.0" maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="176.0" text="Registration  Successful" textAlignment="CENTER" textFill="#1ca1ff" textOverrun="CENTER_WORD_ELLIPSIS" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="125.79999999999995" />
                </children>
                 </AnchorPane>
             </content>

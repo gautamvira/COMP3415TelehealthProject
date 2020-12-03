@@ -12,7 +12,7 @@
                 <Insets />
             </opaqueInsets>
             <items>
-                <Button fx:id="backButton" mnemonicParsing="false" onAction="#redirectToDashboard" text="Back" />
+                <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="Back" />
             </items>
         </ToolBar>
 

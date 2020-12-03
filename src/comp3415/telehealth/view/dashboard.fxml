@@ -25,9 +25,9 @@
                 <AnchorPane fx:id="contentPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Label fx:id="welcomeLabel" layoutX="14.0" layoutY="23.0" text="Welcome, User! Please choose from one of the options below:" />
-                  <Button fx:id="startMeetingButton" layoutX="14.0" layoutY="73.0" mnemonicParsing="false" onAction="#redirectToChat" prefHeight="25.0" prefWidth="175.0" text="Start/Join Patient Meeting" />
-                  <Button fx:id="viewPatientButton" layoutX="14.0" layoutY="124.0" mnemonicParsing="false" onAction="#redirectToViewPatientFile" prefHeight="25.0" prefWidth="175.0" text="Search For/View Patient File" />
-                  <Button fx:id="newPatientButton" layoutX="14.0" layoutY="177.0" mnemonicParsing="false" onAction="#redirectToNewPatientFile" prefHeight="25.0" prefWidth="175.0" text="New Patient File/Add your file" />
+                  <Button fx:id="startMeetingButton" layoutX="14.0" layoutY="73.0" mnemonicParsing="false" onAction="#openChat" prefHeight="25.0" prefWidth="175.0" text="Start/Join Patient Meeting" />
+                  <Button fx:id="viewPatientButton" layoutX="14.0" layoutY="124.0" mnemonicParsing="false" onAction="#viewPatientFile" prefHeight="25.0" prefWidth="175.0" text="Search For/View Patient File" />
+                  <Button fx:id="newPatientButton" layoutX="14.0" layoutY="177.0" mnemonicParsing="false" onAction="#newPatientFile" prefHeight="25.0" prefWidth="175.0" text="New Patient File/Add your file" />
                   <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="204.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
                    <image>
                        <Image url="@../images/caduceus.png" />
@@ -38,6 +38,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
+                  <Label fx:id="statusLabel" layoutX="14.0" layoutY="222.0" prefHeight="50.0" prefWidth="256.0" text="Error messages go here" textFill="#fc0000" wrapText="true" />
                </children>
                 </AnchorPane>
             </content>

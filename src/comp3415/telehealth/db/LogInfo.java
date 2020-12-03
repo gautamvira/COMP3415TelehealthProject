@@ -12,9 +12,9 @@ import javafx.stage.Stage;
  * @author Gautam
  */
 public class LogInfo {
-    public static int UserID;                               // Global variable User ID
-    public static String UName;                             // Global variable User name
-    public static String UType;                             // Global variable for user type (Patient or Doctor)
-    public static boolean isLoggedIn = false;               // Global variable to check if logged in
-    public static Stage window;                       // Global variable for the window (Stage)
+    public static int uID = 0;                  // Global variable User ID
+    public static String uname = "Guest";       // Global variable username
+    public static String displayName = "Guest"; // Global variable for user display name
+    public static String uType = "Patient";     // Global variable for user type (Patient or Doctor)
+    public static boolean isLoggedIn = false;   // Global variable to check if logged in
 }

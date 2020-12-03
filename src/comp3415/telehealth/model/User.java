@@ -1,7 +1,6 @@
 package comp3415.telehealth.model;
 
 
-import comp3415.telehealth.db.LogInfo;
 import comp3415.telehealth.db.MySQLConnections;
 
 import java.sql.Connection;
@@ -33,6 +32,38 @@ public class User{
         // Used to get a User object with no values set
     }
 
+
+    /**
+     * Function that creates a user and inserts it into the database
+     */
+    public static boolean register(String nameField, String userType, String username, String password)
+    {
+        try{
+            String passwordHash = MySQLConnections.getPasswordHash(password);
+
+            Connection sqlConnection = MySQLConnections.getConnection();      // connecting to database
+
+            String userQuery = "INSERT INTO users(uname, pass, uType, displayName)" +
+                                "VALUES(?,?,?,?)";
+            PreparedStatement prepU = sqlConnection.prepareStatement(userQuery);
+
+            prepU.setString(1, username);
+            prepU.setString(2, passwordHash);
+            prepU.setString(3, userType);
+            prepU.setString(4, nameField);
+
+            int resultCount = prepU.executeUpdate();
+            return true;
+
+        }
+        catch(Exception e){ // error while connecting to database
+
+            return false;
+        }
+
+    }
+
+
     /**
      * Static function that returns an array of all users in the database
      * @return ArrayList of all Users in the database
@@ -49,7 +80,7 @@ public class User{
             while(rSet.next()){
                 allUsers.add(new User(
                         rSet.getInt("uID"),
-                        rSet.getString("username"),
+                        rSet.getString("uname"),
                         rSet.getString("pass"),
                         rSet.getString("uType"),
                         rSet.getString("displayName")));
@@ -58,6 +89,34 @@ public class User{
         catch(Exception e){ //error while connecting to database
         }
         return allUsers;
+    }
+
+    /**
+     * Static function that returns a specific user specified by their uID
+     * @param uID the id of the user to retrieve from the database
+     * @return User
+     */
+    public static User getUser(int uID){
+        User user = new User();
+        try{
+            Connection sqlConnection = MySQLConnections.getConnection();
+            String query = "SELECT * FROM users WHERE uID = ?";
+            PreparedStatement prepS = sqlConnection.prepareStatement(query);
+            prepS.setInt(1, uID);
+            ResultSet rSet = prepS.executeQuery();
+
+            if(rSet.next()){
+                user = new User(
+                        rSet.getInt("uID"),
+                        rSet.getString("uname"),
+                        rSet.getString("pass"),
+                        rSet.getString("uType"),
+                        rSet.getString("displayName"));
+            }
+        }
+        catch(Exception e){ //error while connecting to database
+        }
+        return user;
     }
 
     /**
